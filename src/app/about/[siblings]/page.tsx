@@ -14,8 +14,8 @@ export function generateMetadata({params}: siblingParam ) {
 
 export default function Page({params}: siblingParam ) {
     return (
-        <div>
-            <h2>This is my dynamic route paramater: {params.siblings} </h2>
+        <div className="flex flex-col items-center p-0">
+            <h2 className='p-5'>This is my dynamic route paramater: {params.siblings} </h2>
             <Link href='/about'>{`<-- Go back`}</Link>
         </div>
     )

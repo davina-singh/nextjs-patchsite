@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import {Metadata} from 'next'
+import styles from 'src/components/SpotImage.module.css'
 
 export const metadata: Metadata = {
     title: `Patch's Page`,
@@ -56,6 +57,7 @@ export default function Page({searchParams} : {searchParams: siblingsSearchQuery
         sortedSiblings.sort(compareSiblings).reverse()
     }
     return (
+    <div className={`${styles.spotImage}`}>
         <div className="flex min-h-screen flex-col items-center p-0">
             <h4 className="p-5 font-bold">This is my About Page</h4>
             <p className='text-center p-5'>Like my siblings, I am responsible and cute and I often fantasize about mauling the villain Dirty Dawson from the Thunderbolt television series. I look up to Thunderbolt and his father as my role models, especially after they rescued me. When I was attacked by Jasper and Horace, I was the only one of the puppies to attempt to fight back. I also hold a small rivalry with Lucky. Lucky and I are very similar in personality; however, there are a few differences. Lucky is confident and arrogant, compared to myself, who is insecure and humble. Lucky is apparently considered the favourite of the pups; this could be part of our rivalry.
@@ -78,5 +80,6 @@ export default function Page({searchParams} : {searchParams: siblingsSearchQuery
             })}
             <Link className="p-5" href='/'>{`<-- Go back`}</Link>
         </div>
+    </div>
     )
 }

@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import {Metadata} from 'next'
 import styles from 'src/components/SpotImage.module.css'
+import {getSiblings} from '@/lib/siblings'
+
 
 export const metadata: Metadata = {
     title: `Patch's Page`,
@@ -12,35 +14,18 @@ type siblingsSearchQuery = {
 }
 
 type siblingsType = {
-    name: string,
-    id: number
+    title: string,
+    slug: string,
+    content: string,
+    category: string
 }
 
-let siblings: siblingsType[] = [{
-        name: 'Lucky',
-        id: 0
-    }, {
-        name: 'Cadpig',
-        id: 1
-    }, {
-        name: 'Rolly',
-        id: 2
-    }, {
-        name: 'Penny',
-        id: 3
-    }, {
-        name: 'Freckles',
-        id: 4
-    }, {
-        name: 'Pepper',
-        id: 5
-    }
-]
+let siblings = getSiblings()
 
 function compareSiblings(a: siblingsType, b: siblingsType) {
-    if (a.name < b.name) {
+    if (a.title < b.title) {
         return -1;
-    } else if (a.name > b.name) {
+    } else if (a.title > b.title) {
         return 1;
     } else { 
         return 0
@@ -56,6 +41,7 @@ export default function Page({searchParams} : {searchParams: siblingsSearchQuery
     } else if (searchParams.sortBy == 'desc') {
         sortedSiblings.sort(compareSiblings).reverse()
     }
+
     return (
     <div className={`${styles.spotImage}`}>
         <div className="flex min-h-screen flex-col items-center p-0">
@@ -71,10 +57,10 @@ export default function Page({searchParams} : {searchParams: siblingsSearchQuery
             <Link href='/about?sortBy=desc'>Sort by descending</Link>
             <br />
             </div>
-            {sortedSiblings.map(sibling => {
+            {sortedSiblings.map((sibling, index) => {
                 return (
-                    <div key={sibling.id}>
-                        <Link href={`/about/${sibling.name.toLowerCase()}`}>{sibling.name}</Link>
+                    <div key={index}>
+                        <Link href={`/about/${sibling.slug}`}>{sibling.title}</Link>
                     </div>
                 )
             })}
